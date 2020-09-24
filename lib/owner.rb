@@ -1,3 +1,5 @@
+require 'pry' 
+
 class Owner
 
   attr_accessor :dog, :cat
@@ -5,6 +7,7 @@ class Owner
 
 
   @@all = []
+  @@pets = {:dogs => [], :cats => []}
 
   def initialize(name)
     @name = name
@@ -28,19 +31,66 @@ class Owner
       @@all.clear
   end
 
+  def cats
+    total = []
+   Cat.all.each do |cat|
+    if cat.owner == self
+        total << cat
+      end
+   end
+   total
+  end
 
+  def dogs
+    # binding.pry
+    allmydogs = []
+    Dog.all.each do |dog|
+      if dog.owner == self
+        allmydogs << dog
+      end
+    end
+    allmydogs
+  end
 
-
-
-
-
-  def buy_cat
+  
+  def buy_cat(cat)
+    @@pets[:cats] << Cat.new(cat, self)
 
   end
 
-  def buy_dog
+  def buy_dog(dog)
+    @@pets[:dogs] << Dog.new(dog, self)
 
   end
 
+  def walk_dogs
+
+    dogs = @@pets[:dogs]
+    self.dogs.each do |dog|
+      dog.mood = 'happy'
+    end
+  end
+
+  def feed_cats
+    cats = @@pets[:cats]
+    self.cats.each do |cat|
+      cat.mood = 'happy'
+    end
+  end
+
+  def sell_pets
+    dogs = @@pets[:dogs] 
+    cats = @@pets[:cats]
+    pets = dogs + cats
+      pets.each do |pet|
+        pet.owner = nil
+        pet.mood = 'nervous'
+    end
+  end
+
+  def list_pets(name, owner)
+    "I have #{pets[:dogs].length} dog(s), and #{pets[:cats].length} cat(s)."
+
+  end
 
 end

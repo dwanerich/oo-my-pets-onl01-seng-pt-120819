@@ -1,6 +1,6 @@
 class Cat
 
-  attr_accessor :owner, :mood
+  attr_accessor :mood, :owner
   attr_reader :name
 
 
