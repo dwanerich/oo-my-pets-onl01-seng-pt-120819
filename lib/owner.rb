@@ -79,17 +79,16 @@ class Owner
   end
 
   def sell_pets
-    dogs = @@pets[:dogs] 
-    cats = @@pets[:cats]
-    pets = dogs + cats
+   
+    pets = self.dogs + self.cats
       pets.each do |pet|
         pet.owner = nil
         pet.mood = 'nervous'
     end
   end
 
-  def list_pets(name, owner)
-    "I have #{pets[:dogs].length} dog(s), and #{pets[:cats].length} cat(s)."
+  def list_pets
+    "I have #{self.dogs.size} dog(s), and #{self.cats.size} cat(s)."
 
   end
 
